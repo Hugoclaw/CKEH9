@@ -14,6 +14,8 @@
 #include "hisi_fb.h"
 #include "hisi_fb_panel.h"
 #include "panel/mipi_lcd_utils.h"
+#include "linux/display_state.h"
+
 
 
 DEFINE_SEMAPHORE(hisi_fb_dts_resource_sem);
@@ -97,10 +99,18 @@ mipi_ifbc_division_t g_mipi_ifbc_division[MIPI_DPHY_NUM][IFBC_TYPE_MAX] =
 	}
 };
 
+bool display_on = true;
+bool is_display_on()
+{
+	return display_on;
+}
+
 int hisi_lcd_backlight_on(struct platform_device *pdev)
 {
 	struct hisi_fb_data_type *hisifd = NULL;
 	int ret = 0;
+
+	display_on = true;
 
 	if (NULL == pdev) {
 		HISI_FB_ERR("pdev is NULL");
@@ -135,6 +145,8 @@ int hisi_lcd_backlight_off(struct platform_device *pdev)
 {
 	struct hisi_fb_data_type *hisifd = NULL;
 	int ret = 0;
+
+	display_on = false;
 
 	if (NULL == pdev) {
 		HISI_FB_ERR("pdev is NULL");
