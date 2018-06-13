@@ -27,8 +27,8 @@
 #include <chipset_common/dubai/dubai.h>
 #endif
 
-#define DEFAULT_GO_HISPEED_LOAD		90
-#define DEFAULT_HISPEED_FREQ		533000000
+#define DEFAULT_GO_HISPEED_LOAD		95
+#define DEFAULT_HISPEED_FREQ		400000000
 #define DEFAULT_VSYNC_EQULALIZE		45
 #define DEFAULT_LOADING_WINDOW		10
 #define TARGET_LOAD			85
