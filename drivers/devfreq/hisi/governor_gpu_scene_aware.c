@@ -20,14 +20,8 @@
 #include <linux/mutex.h>
 #include <linux/list.h>
 #include <governor.h>
-
 #include <linux/hisi/hisi_devfreq.h>
-
-#ifdef CONFIG_HUAWEI_DUBAI
-#include <chipset_common/dubai/dubai.h>
-#endif
-
-#define DEFAULT_GO_HISPEED_LOAD		95
+#define DEFAULT_GO_HISPEED_LOAD		90
 #define DEFAULT_HISPEED_FREQ		400000000
 #define DEFAULT_VSYNC_EQULALIZE		45
 #define DEFAULT_LOADING_WINDOW		10
@@ -89,13 +83,7 @@ struct devfreq_gpu_scene_aware_data {
 static int devfreq_get_dev_status(struct devfreq *df, struct devfreq_dev_status* stat)
 {
 	int err = df->profile->get_dev_status(df->dev.parent, stat);
-
-#ifdef CONFIG_HUAWEI_DUBAI
-	if (stat->busy_time && stat->current_frequency)
-		dubai_update_gpu_info(stat->current_frequency, stat->busy_time,
-			stat->total_time, df->profile->polling_ms);
-#endif
-
+	
 	return err;
 }
 
